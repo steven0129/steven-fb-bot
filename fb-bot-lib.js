@@ -1,5 +1,5 @@
-const bodyParser=require('body-parser');
-const request=require('request');
+const bodyParser = require('body-parser');
+const request = require('request');
 
 function receivedMessage(event) {
     var senderID = event.sender.id;
