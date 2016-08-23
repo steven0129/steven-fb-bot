@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const fbBotLib=require('./fb-bot-lib.js')
+const bodyParser = require('body-parser');
+const fbBotLib = require('./fb-bot-lib.js')
 const port = process.env.PORT || 80;
 
 app.use(bodyParser.urlencoded({ extended: false }))
