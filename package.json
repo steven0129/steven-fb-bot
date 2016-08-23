@@ -1,0 +1,14 @@
+{
+  "name": "fb-bot-api",
+  "version": "0.0.1",
+  "description": "fb-bot",
+  "main": "app.js",
+  "author": "Steven Gao",
+  "private": true,
+  "engines": {
+    "node": "6.2.2"
+  },
+  "dependencies": {
+    "express": "~4.9.0"
+  }
+}
