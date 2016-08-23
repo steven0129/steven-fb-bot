@@ -13,7 +13,7 @@ bot.on('error', (err) => {
 })
 
 bot.on('message', (payload, reply) => {
-    let text = payload.message.text
+    let text = '您好, ' + profile.last_name + profile.first_name + ', 您剛剛傳送了一則訊息' + payload.message.text;
     bot.getProfile(payload.sender.id, (err, profile) => {
         if (err) throw err
 
