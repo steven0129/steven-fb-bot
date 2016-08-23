@@ -1,53 +1,29 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const fbBotLib = require('./fb-bot-lib.js')
+const http = require('http')
+const Bot = require('messenger-bot')
 const port = process.env.PORT || 80;
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.get('/', (req, res) => {
-    res.send('you have no right to access this page.');
-});
+let bot = new Bot({
+    token: 'EAAQHqpDgbr4BADeCtDlk8zTe2mroLUlZCOi0eQSw2EJ8XseKcijjKSm2cbjMMij4SQUnjV2XrZCqqGUerjj0pZBcrjHy0akKepbQWZCzK0kftLOUIdoZClSICtBjo19ZC6nbPLnPmxogJulawftniYrLshwVIgnjUj4S8NdAaV6wZDZD',
+    verify: 'stevenfbbot',
+    app_secret: 'cb7253f4b83a5afd1e41790a81cd8199'
+})
 
-app.get('/webhook', (req, res) => {
-    if (req.query['hub.mode'] === 'subscribe' &&
-        req.query['hub.verify_token'] === 'stevenfbbot') {
-        console.log("Validating webhook");
-        res.status(200).send(req.query['hub.challenge']);
-    } else {
-        console.error("Failed validation. Make sure the validation tokens match.");
-        res.sendStatus(403);
-    }
-});
+bot.on('error', (err) => {
+    console.log(err.message)
+})
 
-app.post('/webhook', (req, res) => {
-    var data = req.body;
-    if (data.object == 'page') {
-        data.entry.forEach((pageEntry) => {
-            var pageID = pageEntry.id;
-            var timeOfEvent = pageEntry.time;
-            pageEntry.messaging.forEach((messagingEvent) => {
-                if (messagingEvent.optin) {
-                    // receivedAuthentication(messagingEvent);
-                    console.log('optin');
-                } else if (messagingEvent.message) {
-                    fbBotLib.receivedMessage(messagingEvent);
-                } else if (messagingEvent.delivery) {
-                    // receivedDeliveryConfirmation(messagingEvent);
-                    console.log('delivery confirm');
-                } else if (messagingEvent.postback) {
-                    // receivedPostback(messagingEvent);
-                    console.log(postBack);
-                } else {
-                    console.log('Webhook received unknown messagingEvent: ' + messagingEvent);
-                }
-            });
-        });
+bot.on('message', (payload, reply) => {
+    let text = payload.message.text
+    bot.getProfile(payload.sender.id, (err, profile) => {
+        if (err) throw err
 
-        res.sendStatus(200);
-    }
-});
+        reply({ text }, (err) => {
+            if (err) throw err
 
-app.listen(port, () => {
-    console.log('listening on port ' + port);
-});
+            console.log(`Echoed back to ${profile.first_name} ${profile.last_name}: ${text}`)
+        })
+    })
+})
+
+http.createServer(bot.middleware()).listen(port)
+console.log('Echo bot server running at port ' + port + '.')
