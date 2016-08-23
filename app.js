@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const port = process.env.PORT || 80;
 
 app.get('/', (req, res) => {
     res.send('you have no right to access this page.');
@@ -14,4 +15,8 @@ app.get('/webhook', (req, res) => {
         console.error("Failed validation. Make sure the validation tokens match.");
         res.sendStatus(403);
     }
+});
+
+app.listen(port, () => {
+    console.log('listening on port ' + port);
 });
