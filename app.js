@@ -14,7 +14,6 @@ bot.on('error', (err) => {
 
 bot.on('message', (payload, reply) => {
     reply({
-        text: 'hey!',
         attachment: {
             type: 'image',
             payload: {
