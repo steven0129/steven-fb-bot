@@ -18,7 +18,7 @@ bot.on('message', (payload, reply) => {
         attachment: {
             type: 'image',
             payload: {
-                url: 'https://petersapparel.com/img/shirt.png'
+                url: 'http://x.rce.tw/s/h3584935/messenger-bot-store.jpg'
             }
         }
     }, (err, info) => { })
