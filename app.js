@@ -3,7 +3,7 @@ const Bot = require('messenger-bot')
 const port = process.env.PORT || 80;
 
 let bot = new Bot({
-    token: 'EAAQHqpDgbr4BADeCtDlk8zTe2mroLUlZCOi0eQSw2EJ8XseKcijjKSm2cbjMMij4SQUnjV2XrZCqqGUerjj0pZBcrjHy0akKepbQWZCzK0kftLOUIdoZClSICtBjo19ZC6nbPLnPmxogJulawftniYrLshwVIgnjUj4S8NdAaV6wZDZD',
+    token: 'EAAQHqpDgbr4BAAZBzHQiZBqLqVflUyeZAdKDJKpEjTq8tTMZCGP2VZC6L2ZAnAacu35jbNdcvw5kcSZBkZB7DldUz5enJImuFtq1plauT4K4GuUfoMDj8m96GJ3twmUKEZC9IEDiZBqAYFxNafq1kXZBfPNMKiBtUYEVvYmRqZA9OUnZB8QZDZD',
     verify: 'stevenfbbot',
     app_secret: 'cb7253f4b83a5afd1e41790a81cd8199'
 })
