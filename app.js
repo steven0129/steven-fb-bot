@@ -22,7 +22,7 @@ bot.on('message', (payload, reply) => {
             }
         }
     }, (err, info) => {
-        console.log(info);
+        console.log(err);
      })
 })
 
