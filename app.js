@@ -21,7 +21,9 @@ bot.on('message', (payload, reply) => {
                 url: 'http://x.rce.tw/s/h3584935/messenger-bot-store.jpg'
             }
         }
-    }, (err, info) => { })
+    }, (err, info) => {
+        console.log(info);
+     })
 })
 
 http.createServer(bot.middleware()).listen(port)
