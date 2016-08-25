@@ -14,7 +14,7 @@ bot.on('error', (err) => {
 
 bot.on('message', (payload, reply) => {
     let payloadText = payload.message.text;
-    console.log(payload.message.attachments[0].payload.coordinates);
+    console.log(payload.message.attachments[0].payload.coordinates); //座標
     reply({
         attachment: {
             type: 'template',
