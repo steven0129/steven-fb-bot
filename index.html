@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Steven-fb-bot by Yu-Che-Gao</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Steven-fb-bot</h1>
+        <h2>V0.0.2</h2>
+        <a href="https://github.com/Yu-Che-Gao/steven-fb-bot" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="messenger-bot-using-nodejs-example-facebook-api-explorer-bot" class="anchor" href="#messenger-bot-using-nodejs-example-facebook-api-explorer-bot" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>messenger bot using nodeJS example: facebook api explorer bot</h1>
+
+<p>the image of executing:</p>
+
+<p><img src="https://github.com/Yu-Che-Gao/steven-fb-bot/blob/master/img/messenger-bot-image.jpg"></p>
+
+<h2>
+<a id="quick-start" class="anchor" href="#quick-start" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick Start</h2>
+
+<p>Copy and paste app.js, then install messenger-bot which is one of nodeJS modules</p>
+
+<h2>
+<a id="message-type-of-messenger" class="anchor" href="#message-type-of-messenger" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Message type of messenger</h2>
+
+<p>According to <a href="https://developers.facebook.com/docs/messenger-platform">official document</a>, there are several types of message.</p>
+
+<ol>
+<li>
+<p>Text message</p>
+
+<ol>
+<li>
+<p>Raw data</p>
+
+<pre>
+curl -X POST -H "Content-Type: application/json" -d '{
+    "recipient":{
+        "id":"USER_ID"
+    },
+    "message":{
+        "text":"hello, world!"
+    }
+ }' "https://graph.facebook.com/v2.6/me/messages?access_token=PAGE_ACCESS_TOKEN"
+ </pre>
+</li>
+<li>
+<p>Messenger-bot module data</p>
+
+<pre>
+    { text: 'hello world!' }, (err, info) =&gt; { }
+</pre>
+</li>
+</ol>
+</li>
+<li>
+<p>Image attachment</p>
+
+<ol>
+<li>
+<p>Raw data</p>
+
+<pre>
+    curl -X POST -H "Content-Type: application/json" -d '{
+    "recipient":{
+        "id":"USER_ID"
+    },
+    "message":{
+        "attachment":{
+            "type":"image",
+            "payload":{
+                "url":"https://petersapparel.com/img/shirt.png"
+            }
+        }
+    }
+    }' "https://graph.facebook.com/v2.6/me/messages?access_token=PAGE_ACCESS_TOKEN"
+</pre>
+</li>
+<li>
+<p>Messenger-bot module data</p>
+
+<pre>
+    attachment:{
+        type:"image",
+        payload:{
+            url:"https://petersapparel.com/img/shirt.png"
+        }
+    }
+</pre>
+</li>
+</ol>
+</li>
+<li>
+<p>Generic Template</p>
+
+<ol>
+<li>
+<p>Raw data</p>
+
+<pre>
+    curl -X POST -H "Content-Type: application/json" -d '{
+    "recipient":{
+        "id":"USER_ID"
+    },
+    "message":{
+        "attachment":{
+        "type":"template",
+        "payload":{
+            "template_type":"generic",
+            "elements":[
+            {
+                "title":"facebook api explorer",
+                "image_url":"http://x.rce.tw/s/h3584935/messenger-bot-store.jpg",
+                "subtitle":"Answering API is my style!!",
+                "buttons":[
+                {
+                    "type":"web_url",
+                    "url":"https://developers.facebook.com/search/?q=",
+                    "title":"View Website"
+                },
+                {
+                    "type":"postback",
+                    "title":"Start Chatting",
+                    "payload":"USER_DEFINED_PAYLOAD"
+                }              
+                ]
+            }
+            ]
+        }
+        }
+    }
+    }' "https://graph.facebook.com/v2.6/me/messages?access_token=PAGE_ACCESS_TOKEN" 
+</pre>
+</li>
+<li>
+<p>Messenger-bot module data</p>
+
+<pre>
+    attachment: {
+        type: 'template',
+        payload: {
+            template_type: 'generic',
+            elements: [
+                {
+                    title: 'facebook api explorer',
+                    image_url: 'http://x.rce.tw/s/h3584935/messenger-bot-store.jpg',
+                    subtitle: 'Answering API is my style!!',
+                    buttons: [
+                        {
+                            type: 'web_url',
+                            url: 'https://developers.facebook.com/search/?q=' + payloadText,
+                            title: 'Search ' + payloadText
+                        },
+                        {
+                            type: 'postback',
+                            title: 'Ask me',
+                            payload: 'Ask me'
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+</pre>
+</li>
+</ol>
+</li>
+</ol>
+
+<h2>
+<a id="handle-postback" class="anchor" href="#handle-postback" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Handle postback</h2>
+
+<ol>
+<li>
+<p>Define
+Postbacks occur when a Postback button, Get Started button, Persistent menu or Structured Message is tapped. The payload field in the callback is defined on the button.</p>
+
+<p>You can subscribe to this callback by selecting the messaging_postbacks field when setting up your webhook.</p>
+</li>
+<li>
+<p>Raw data</p>
+
+<pre>
+    {
+    "sender":{
+        "id":"USER_ID"
+    },
+    "recipient":{
+        "id":"PAGE_ID"
+    },
+    "timestamp":1458692752478,
+    "postback":{
+        "payload":"USER_DEFINED_PAYLOAD"
+    }
+    }   
+</pre>
+</li>
+<li>
+<p>Messenger-bot module data</p>
+
+<pre>
+    bot.on('postback', (payload, reply) =&gt; {
+        reply({ text: 'please enter what you want to search from facebook API' }, (err, info) =&gt; { })
+    })
+</pre>
+</li>
+</ol>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/Yu-Che-Gao/steven-fb-bot/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/Yu-Che-Gao/steven-fb-bot/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/Yu-Che-Gao/steven-fb-bot"></a> is maintained by <a href="https://github.com/Yu-Che-Gao">Yu-Che-Gao</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
