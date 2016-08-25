@@ -14,7 +14,7 @@ bot.on('error', (err) => {
 
 bot.on('message', (payload, reply) => {
     let payloadText = payload.message.text;
-    console.log('received message: ' + payload);
+    console.log(payload);
     reply({
         attachment: {
             type: 'template',
