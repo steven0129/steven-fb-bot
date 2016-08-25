@@ -15,17 +15,21 @@ According to <a href="https://developers.facebook.com/docs/messenger-platform">o
 1. text message
     1. raw data
         <p>
-            curl -X POST -H "Content-Type: application/json" -d '{
-            "recipient":{
-                "id":"USER_ID"
-            },
-            "message":{
-                "text":"hello, world!"
-            }
-            }' "https://graph.facebook.com/v2.6/me/messages?access_token=PAGE_ACCESS_TOKEN"
+            <code>
+                curl -X POST -H "Content-Type: application/json" -d '{
+                "recipient":{
+                    "id":"USER_ID"
+                },
+                "message":{
+                    "text":"hello, world!"
+                }
+                }' "https://graph.facebook.com/v2.6/me/messages?access_token=PAGE_ACCESS_TOKEN"
+            </code>
         </p>
     
     2. messenger-bot module data
         <p>
-        { text: 'hello world!' }, (err, info) => { }
+            <code>
+                { text: 'hello world!' }, (err, info) => { }
+            </code>
         </p>
