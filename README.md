@@ -153,3 +153,8 @@ According to <a href="https://developers.facebook.com/docs/messenger-platform">o
             reply({ text: 'please enter what you want to search from facebook API' }, (err, info) => { })
         })
     </pre>
+
+4. Parse coordinates
+    <pre>
+        解析座標方法 payload.message.attachments[0].payload.coordinates
+    </pre>
