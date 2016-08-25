@@ -29,11 +29,11 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h1>
-<a id="messenger-bot-using-nodejs-example-facebook-api-explorer-bot" class="anchor" href="#messenger-bot-using-nodejs-example-facebook-api-explorer-bot" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>messenger bot using nodeJS example: facebook api explorer bot</h1>
+<a id="messenger-bot-using-nodejs-example-facebook-api-explorer-bot" class="anchor" href="#messenger-bot-using-nodejs-example-facebook-api-explorer-bot" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Messenger bot using nodeJS example: facebook api explorer bot</h1>
 
 <p>the image of executing:</p>
 
-<p><img src="https://github.com/Yu-Che-Gao/steven-fb-bot/raw/master/img/messenger-bot-image.jpg"></p>
+<p><img src="https://github.com/Yu-Che-Gao/steven-fb-bot/blob/master/img/messenger-bot-image.jpg"></p>
 
 <h2>
 <a id="quick-start" class="anchor" href="#quick-start" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick Start</h2>
@@ -222,6 +222,13 @@ Postbacks occur when a Postback button, Get Started button, Persistent menu or S
     bot.on('postback', (payload, reply) =&gt; {
         reply({ text: 'please enter what you want to search from facebook API' }, (err, info) =&gt; { })
     })
+</pre>
+</li>
+<li>
+<p>Parse coordinates</p>
+
+<pre>
+    解析座標方法 payload.message.attachments[0].payload.coordinates
 </pre>
 </li>
 </ol>
