@@ -14,7 +14,7 @@ bot.on('error', (err) => {
 
 bot.on('message', (payload, reply) => {
     let payloadText = payload.message.text;
-    console.log('received text message: ' + payloadText);
+    console.log('received message: ' + payload);
     reply({
         attachment: {
             type: 'template',
@@ -65,5 +65,9 @@ bot.on('postback', (payload, reply) => {
     }, (err, info) => { })
 })
 
+
+
 http.createServer(bot.middleware()).listen(port)
 console.log('Echo bot server running at port ' + port + '.')
+
+bot.sendMessage()
