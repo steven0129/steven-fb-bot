@@ -12,5 +12,16 @@ Copy and paste app.js, then install messenger-bot which is one of nodeJS modules
 
 According to <a href="https://developers.facebook.com/docs/messenger-platform">official document</a>, there are many types of message types.
 
-1. text message:
-    1. testing
+1. text message
+    1. raw data
+        curl -X POST -H "Content-Type: application/json" -d '{
+        "recipient":{
+            "id":"USER_ID"
+        },
+        "message":{
+            "text":"hello, world!"
+        }
+        }' "https://graph.facebook.com/v2.6/me/messages?access_token=PAGE_ACCESS_TOKEN"
+    
+    2. messenger-bot module data
+        { text: 'hello world!' }, (err, info) => { }
