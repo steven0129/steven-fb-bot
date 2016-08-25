@@ -1,4 +1,4 @@
-#messenger bot using nodeJS example: facebook api explorer bot
+#Messenger bot using nodeJS example: facebook api explorer bot
 
 the image of executing:
 
