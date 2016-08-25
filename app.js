@@ -14,7 +14,7 @@ bot.on('error', (err) => {
 
 bot.on('message', (payload, reply) => {
     let payloadText = payload.message.text;
-
+    console.log('received: ' + payloadText);
     if (payloadText != 'Ask me') {
         reply({
             attachment: {
@@ -35,7 +35,7 @@ bot.on('message', (payload, reply) => {
                                 {
                                     type: "postback",
                                     title: "Ask me",
-                                    payload:'Ask me'
+                                    payload: 'Ask me'
                                 }
                             ]
                         }
