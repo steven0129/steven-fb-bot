@@ -8,7 +8,7 @@ the image of executing:
 
 Copy and paste app.js, then install messenger-bot which is one of nodeJS modules
 
-##message type of messenger
+##Message type of messenger
 
 According to <a href="https://developers.facebook.com/docs/messenger-platform">official document</a>, there are several types of message.
 
@@ -123,3 +123,33 @@ According to <a href="https://developers.facebook.com/docs/messenger-platform">o
                 }
             }
         </pre>
+
+##Handle postback
+
+1. Define
+    Postbacks occur when a Postback button, Get Started button, Persistent menu or Structured Message is tapped. The payload field in the callback is defined on the button.
+    
+    You can subscribe to this callback by selecting the messaging_postbacks field when setting up your webhook.
+
+2. Raw data
+    <pre>
+        {
+        "sender":{
+            "id":"USER_ID"
+        },
+        "recipient":{
+            "id":"PAGE_ID"
+        },
+        "timestamp":1458692752478,
+        "postback":{
+            "payload":"USER_DEFINED_PAYLOAD"
+        }
+        }   
+    </pre>
+
+3. Messenger-bot module data
+    <pre>
+        bot.on('postback', (payload, reply) => {
+            reply({ text: 'please enter what you want to search from facebook API' }, (err, info) => { })
+        })
+    </pre>
