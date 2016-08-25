@@ -48,7 +48,7 @@ bot.on('message', (payload, reply) => {
 })
 
 bot.on('postback', (payload, reply) => {
-    reply({ text: 'please enter what you want to search from facebook.' }, (err, info) => { })
+    reply({ text: 'please enter what you want to search from facebook API' }, (err, info) => { })
 })
 
 http.createServer(bot.middleware()).listen(port)
