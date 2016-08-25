@@ -13,31 +13,38 @@ bot.on('error', (err) => {
 })
 
 bot.on('message', (payload, reply) => {
+    let payloadText = payload.message.text;
+
     reply({
         attachment: {
             type: 'template',
             payload: {
-                template_type:'generic',
-                elements:[
+                template_type: 'generic',
+                elements: [
                     {
-                        title:'facebook api explorer',
+                        title: 'facebook api explorer',
                         image_url: 'http://x.rce.tw/s/h3584935/messenger-bot-store.jpg',
-                        subtitle:'Answering API is my style!!',
-                        buttons:[
+                        subtitle: 'Answering API is my style!!',
+                        buttons: [
                             {
-                                type:'web_url',
-                                url:'https://developers.facebook.com/search/?q=aa',
-                                title:'aa'
+                                type: 'web_url',
+                                url: 'https://developers.facebook.com/search/?q=' + payloadText,
+                                title: 'Search ' + payloadText
+                            },
+                            {
+                                type: "postback",
+                                title: "Ask me",
+                                payload: "please enter what you want to search from facebook API"
                             }
                         ]
                     }
                 ]
-                
+
             }
         }
     }, (err, info) => {
         console.log(err);
-     })
+    })
 })
 
 http.createServer(bot.middleware()).listen(port)
