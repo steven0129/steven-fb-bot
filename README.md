@@ -2,7 +2,7 @@
 
 the image of executing:
 
-<img src="img/messenger-bot-image.jpg">
+<img src="https://github.com/Yu-Che-Gao/steven-fb-bot/blob/master/img/messenger-bot-image.jpg">
 
 ##Quick Start
 
