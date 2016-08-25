@@ -48,7 +48,21 @@ bot.on('message', (payload, reply) => {
 })
 
 bot.on('postback', (payload, reply) => {
-    reply({ text: 'please enter what you want to search from facebook API' }, (err, info) => { })
+    reply({ 
+        text: 'please enter what you want to search from facebook API',
+        quick_replies:[
+            {
+                content_type:'text',
+                title:'access token',
+                payload:"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE"
+            },
+            {
+                content_type:'text',
+                title:'graph api',
+                payload:"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE"
+            }
+        ]
+    }, (err, info) => { })
 })
 
 http.createServer(bot.middleware()).listen(port)
