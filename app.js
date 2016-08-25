@@ -14,46 +14,41 @@ bot.on('error', (err) => {
 
 bot.on('message', (payload, reply) => {
     let payloadText = payload.message.text;
-    console.log('received: ' + payloadText);
-    if (payloadText != 'Ask me') {
-        reply({
-            attachment: {
-                type: 'template',
-                payload: {
-                    template_type: 'generic',
-                    elements: [
-                        {
-                            title: 'facebook api explorer',
-                            image_url: 'http://x.rce.tw/s/h3584935/messenger-bot-store.jpg',
-                            subtitle: 'Answering API is my style!!',
-                            buttons: [
-                                {
-                                    type: 'web_url',
-                                    url: 'https://developers.facebook.com/search/?q=' + payloadText,
-                                    title: 'Search ' + payloadText
-                                },
-                                {
-                                    type: "postback",
-                                    title: "Ask me",
-                                    payload: 'Ask me'
-                                }
-                            ]
-                        }
-                    ]
+    console.log('received text message: ' + payloadText);
+    reply({
+        attachment: {
+            type: 'template',
+            payload: {
+                template_type: 'generic',
+                elements: [
+                    {
+                        title: 'facebook api explorer',
+                        image_url: 'http://x.rce.tw/s/h3584935/messenger-bot-store.jpg',
+                        subtitle: 'Answering API is my style!!',
+                        buttons: [
+                            {
+                                type: 'web_url',
+                                url: 'https://developers.facebook.com/search/?q=' + payloadText,
+                                title: 'Search ' + payloadText
+                            },
+                            {
+                                type: "postback",
+                                title: "Ask me",
+                                payload: 'Ask me'
+                            }
+                        ]
+                    }
+                ]
 
-                }
             }
-        }, (err, info) => {
-            console.log(err);
-        })
-    } else {
-        reply({
-            text: 'Please enter what you want to search from facebook API'
-        }, (err, info) => {
-            console.log(err);
-        })
-    }
+        }
+    }, (err, info) => {
+        console.log(err);
+    })
+})
 
+bot.on('postback', (payload, reply) => {
+    reply({ text: 'please enter what you want to search from facebook.' }, (err, info) => { })
 })
 
 http.createServer(bot.middleware()).listen(port)
