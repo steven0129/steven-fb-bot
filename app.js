@@ -32,8 +32,8 @@ bot.on('message', (payload, reply) => {
                                 title: 'Search ' + payloadText
                             },
                             {
-                                type: "postback",
-                                title: "Ask me",
+                                type: 'postback',
+                                title: 'Ask me',
                                 payload: 'Ask me'
                             }
                         ]
