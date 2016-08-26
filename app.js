@@ -50,7 +50,7 @@ bot.on('message', (payload, reply) => {
         }, (err, info) => {
             console.log(err);
         })
-    } else if(payload.message.attachments[0].payload.type==='image') {
+    } else if(payload.message.attachments[0].type==='image') {
         reply({
             attachment:{
                 type:'image',
