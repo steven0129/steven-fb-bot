@@ -62,7 +62,20 @@ bot.on('postback', (payload, reply) => {
         };
     })
 
-    messengerBotLib.getQuickReplies('請選擇起程站', startObject, function (message) {
+    let startObject1 = [];
+    for (let i = 0; i < 6; i++) {
+        startObject1[i] = startObject[i];
+    }
+
+    for (let i = 6; i < 12; i++) {
+        startObject2[i] = startObject[i];
+    }
+
+    messengerBotLib.getQuickReplies('請選擇起程站', startObject1, function (message) {
+        reply(message, (err, info) => { console.log(err); });
+    });
+
+    messengerBotLib.getQuickReplies('請選擇起程站', startObject2, function (message) {
         reply(message, (err, info) => { console.log(err); });
     });
 })
