@@ -61,7 +61,7 @@ bot.on('message', (payload, reply) => {
         }
 
         console.log(messengerBotLib.getTemplateMessage('buttons', '請選擇起程站', startObject));
-        reply(messengerBotLib.getTemplateMessage('buttons', '請選擇起程站', startObject), (err, info) => { });
+        reply(messengerBotLib.getTemplateMessage('button', '請選擇起程站', startObject), (err, info) => { });
 
     } else if (payload.message.attachments[0].type === 'image') {
         reply({
