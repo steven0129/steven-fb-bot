@@ -19,23 +19,31 @@ bot.on('message', (payload, reply) => {
 
     if (typeof (payload.message.text) !== 'undefined') {
         let payloadText = payload.message.text;
-        let buttons = [
-            {
-                type: 'web_url',
-                url: 'https://developers.facebook.com/search/?q=' + payloadText,
-                title: 'search ' + payloadText
-            },
-            {
-                type: 'postback',
-                title: 'Help',
-                payload: 'Help'
-            }
-        ]
-        messengerBotLib.getTemplateMessage('button', 'What you want to do?', buttons, function (message) {
-            console.log(message);
-            reply(message, (err, info) => { console.log(err) });
-        })
 
+        switch (payloadText) {
+            case 'direction':
+                let choice = [
+                    { content_type: 'text', title: '北上', payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE' },
+                    { contnet_type: 'text', title: '南下', payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE' }
+                ];
+
+                messengerBotLib.getQuickReplies('請選擇方向', choice, (message) => {
+                    reply(message, (err, info) => { console.log(err); });
+                });
+                break;
+
+            default:
+                let buttons = [
+                    { type: 'web_url', url: 'https://developers.facebook.com/search/?q=' + payloadText, title: 'search ' + payloadText },
+                    { type: 'postback', title: 'Help', payload: 'Help' }
+                ]
+
+                messengerBotLib.getTemplateMessage('button', 'What you want to do?', buttons, (message) => {
+                    console.log(message);
+                    reply(message, (err, info) => { console.log(err) });
+                })
+                break;
+        }
 
     } else if (payload.message.attachments[0].type === 'image') {
         reply({
@@ -52,31 +60,12 @@ bot.on('message', (payload, reply) => {
 })
 
 bot.on('postback', (payload, reply) => {
-    let startStation = ['左營', '台南', '嘉義', '雲林', '彰化', '台中', '苗栗', '新竹', '桃園', '板橋', '台北', '南港'];
-    let startObject = [];
-    startStation.map(function (value, index) {
-        startObject[index] = {
-            content_type: 'text',
-            title: startStation[index],
-            payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE'
-        };
-    })
+    let choice = [
+        { content_type: 'text', title: '北上', payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE' },
+        { contnet_type: 'text', title: '南下', payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE' }
+    ];
 
-    let startObject1 = [];
-    let startObject2 = [];
-    for (let i = 0; i < 6; i++) {
-        startObject1[i] = startObject[i];
-    }
-
-    for (let i = 6; i < 12; i++) {
-        startObject2[i] = startObject[i];
-    }
-
-    messengerBotLib.getQuickReplies('請選擇起程站', startObject1, function (message) {
-        reply(message, (err, info) => { console.log(err); });
-    });
-
-    messengerBotLib.getQuickReplies('請選擇起程站', startObject2, function (message) {
+    messengerBotLib.getQuickReplies('請選擇方向', choice, (message) => {
         reply(message, (err, info) => { console.log(err); });
     });
 })
