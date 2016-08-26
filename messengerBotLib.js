@@ -26,11 +26,9 @@ function getTemplateMessage() {
                     }
                 ]
             };
-            callbackG(baseMessage);
-
             break;
 
-        //generic template
+        //buttons template
         //example: getTemplateMessage('button', textB, buttonsB);
         case 'button':
             let textB = arguments[1];
@@ -41,10 +39,10 @@ function getTemplateMessage() {
                 text: textB,
                 buttons: buttonsB
             };
-            callbackB(baseMessage);
-
             break;
     }
+
+    return baseMessage;
 }
 
 function getTextMessage() {

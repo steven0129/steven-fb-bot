@@ -1,9 +1,10 @@
 const http = require('http')
 const Bot = require('messenger-bot')
 const messengerBotLib = require('./messengerBotLib.js');
+const promiseLib = require('./promiseLib.js');
 const port = process.env.PORT || 80;
 
-let bot = new Bot({
+var bot = new Bot({
     token: 'EAAQHqpDgbr4BAAZBzHQiZBqLqVflUyeZAdKDJKpEjTq8tTMZCGP2VZC6L2ZAnAacu35jbNdcvw5kcSZBkZB7DldUz5enJImuFtq1plauT4K4GuUfoMDj8m96GJ3twmUKEZC9IEDiZBqAYFxNafq1kXZBfPNMKiBtUYEVvYmRqZA9OUnZB8QZDZD',
     verify: 'stevenfbbot',
     app_secret: 'cb7253f4b83a5afd1e41790a81cd8199'
@@ -27,9 +28,18 @@ bot.on('message', (payload, reply) => {
                     { content_type: 'text', title: '南下', payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE' }
                 ];
 
-                messengerBotLib.getQuickReplies('請選擇方向', choice, (message) => {
+                let promise = promiseLib.getNewPromise(choice);
+                promise.then((value) => {
+                    console.log(value);
+                    return messengerBotLib.getQuickReplies('請選擇方向', value);
+                }).then((message) => {
+                    console.log(message);
                     reply(message, (err, info) => { console.log(err); });
-                });
+                })
+
+                // messengerBotLib.getQuickReplies('請選擇方向', choice, (message) => {
+                //     reply(message, (err, info) => { console.log(err); });
+                // });
                 break;
 
             default:
