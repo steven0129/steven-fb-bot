@@ -52,21 +52,19 @@ bot.on('message', (payload, reply) => {
 })
 
 bot.on('postback', (payload, reply) => {
-    reply({
-        text: 'please enter what you want to search from facebook API',
-        quick_replies: [
-            {
-                content_type: 'text',
-                title: 'access token',
-                payload: "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE"
-            },
-            {
-                content_type: 'text',
-                title: 'graph api',
-                payload: "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE"
-            }
-        ]
-    }, (err, info) => { })
+    let startStation = ['左營', '台南', '嘉義', '雲林', '彰化', '台中', '苗栗', '新竹', '桃園', '板橋', '台北', '南港'];
+    let startObject = [];
+    startStation.map(function (value, index) {
+        startObject[index] = {
+            content_type: 'text',
+            title: startStation[index],
+            payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE'
+        };
+    })
+
+    getQuickReplies('請選擇起程站', startObject, function (message) {
+        reply(message, (err, info) => { console.log(err); });
+    });
 })
 
 
