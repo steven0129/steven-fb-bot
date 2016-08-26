@@ -15,7 +15,6 @@ bot.on('error', (err) => {
 })
 
 bot.on('message', (payload, reply) => {
-    // console.log(payload.message.attachments[0].payload.url);
     console.log(payload);
 
     if (typeof (payload.message.text) !== 'undefined') {
@@ -28,8 +27,8 @@ bot.on('message', (payload, reply) => {
                     { content_type: 'text', title: '南下', payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE' }
                 ];
 
-                let promise = promiseLib.getNewPromise(choice);
-                promise.then((value) => {
+                let promiseDirection = promiseLib.getNewPromise(choice);
+                promiseDirection.then((value) => {
                     console.log(value);
                     return messengerBotLib.getQuickReplies('請選擇方向', value);
                 }).then((message) => {
@@ -37,9 +36,6 @@ bot.on('message', (payload, reply) => {
                     reply(message, (err, info) => { console.log(err); });
                 })
 
-                // messengerBotLib.getQuickReplies('請選擇方向', choice, (message) => {
-                //     reply(message, (err, info) => { console.log(err); });
-                // });
                 break;
 
             default:
@@ -48,10 +44,15 @@ bot.on('message', (payload, reply) => {
                     { type: 'postback', title: 'Help', payload: 'Help' }
                 ]
 
-                messengerBotLib.getTemplateMessage('button', 'What you want to do?', buttons, (message) => {
+                let promiseButtons = promiseLib.getNewPromise(buttons);
+                promiseButtons.then((value) => {
+                    console.log(value);
+                    return messengerBotLib.getTemplateMessage('button', 'what you want to do?', buttons);
+                }).then((message) => {
                     console.log(message);
-                    reply(message, (err, info) => { console.log(err) });
+                    reply(message, (err, info) => { console.log(err); });
                 })
+
                 break;
         }
 
@@ -75,9 +76,14 @@ bot.on('postback', (payload, reply) => {
         { content_type: 'text', title: '南下', payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE' }
     ];
 
-    messengerBotLib.getQuickReplies('請選擇方向', choice, (message) => {
+    let promise = promiseLib.getNewPromise(choice);
+    promise.then((value) => {
+        console.log(value);
+        return messengerBotLib.getQuickReplies('請選擇方向', value);
+    }).then((message) => {
+        console.log(message);
         reply(message, (err, info) => { console.log(err); });
-    });
+    })
 })
 
 
