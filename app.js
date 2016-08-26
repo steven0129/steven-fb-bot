@@ -13,6 +13,7 @@ bot.on('error', (err) => {
 })
 
 bot.on('message', (payload, reply) => {
+    console.log(payload);
     let payloadText = payload.message.text;
     //console.log(payload.message.attachments[0].payload.coordinates); //座標
     //TODO: 解析座標位置
@@ -50,18 +51,18 @@ bot.on('message', (payload, reply) => {
 })
 
 bot.on('postback', (payload, reply) => {
-    reply({ 
+    reply({
         text: 'please enter what you want to search from facebook API',
-        quick_replies:[
+        quick_replies: [
             {
-                content_type:'text',
-                title:'access token',
-                payload:"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE"
+                content_type: 'text',
+                title: 'access token',
+                payload: "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE"
             },
             {
-                content_type:'text',
-                title:'graph api',
-                payload:"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE"
+                content_type: 'text',
+                title: 'graph api',
+                payload: "DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE"
             }
         ]
     }, (err, info) => { })
