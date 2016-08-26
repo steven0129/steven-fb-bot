@@ -14,6 +14,7 @@ function getTemplateMessage() {
             let imageUrlG = arguments[2];
             let subTitleG = arguments[3];
             let buttonsG = arguments[4];
+            let callbackG=arguments[5];
             baseMessage.attachment.payload = {
                 template_type: 'generic',
                 elements: [
@@ -25,6 +26,8 @@ function getTemplateMessage() {
                     }
                 ]
             };
+            callbackG(baseMessage);
+
             break;
 
         //generic template
@@ -32,12 +35,13 @@ function getTemplateMessage() {
         case 'button':
             let textB = arguments[1];
             let buttonsB = arguments[2];
+            let callbackB=arguments[3];
             baseMessage.attachment.payload = {
                 template_type: 'button',
                 text: textB,
                 buttons: buttonsB
             };
-            console.log(baseMessage);
+            callbackB(baseMessage);
 
             break;
     }
