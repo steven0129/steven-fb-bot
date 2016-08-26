@@ -62,7 +62,7 @@ bot.on('postback', (payload, reply) => {
         };
     })
 
-    getQuickReplies('請選擇起程站', startObject, function (message) {
+    messengerBotLib.getQuickReplies('請選擇起程站', startObject, function (message) {
         reply(message, (err, info) => { console.log(err); });
     });
 })
