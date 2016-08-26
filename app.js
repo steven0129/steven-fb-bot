@@ -13,7 +13,7 @@ bot.on('error', (err) => {
 })
 
 bot.on('message', (payload, reply) => {
-    console.log(payload.attachments);
+    console.log(payload.message.attachments);
     let payloadText = payload.message.text;
     //console.log(payload.message.attachments[0].payload.coordinates); //座標
     //TODO: 解析座標位置
