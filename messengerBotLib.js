@@ -71,5 +71,10 @@ function getQuickReplies() {
     callback(baseMessage);
 }
 
+function getImageMessage() {
+    //TODO: image type of message
+}
+
 exports.getTemplateMessage = getTemplateMessage;
 exports.getTextMessage = getTextMessage;
+exports.getQuickReplies=getQuickReplies;
