@@ -13,41 +13,55 @@ bot.on('error', (err) => {
 })
 
 bot.on('message', (payload, reply) => {
-    console.log(payload.message.attachments.payload.url);
-    let payloadText = payload.message.text;
-    //console.log(payload.message.attachments[0].payload.coordinates); //座標
-    //TODO: 解析座標位置
+    console.log(payload.message.attachments[0].payload.url);
 
-    reply({
-        attachment: {
-            type: 'template',
-            payload: {
-                template_type: 'generic',
-                elements: [
-                    {
-                        title: 'facebook api explorer',
-                        image_url: 'http://x.rce.tw/s/h3584935/messenger-bot-store.jpg',
-                        subtitle: 'Answering API is my style!!',
-                        buttons: [
-                            {
-                                type: 'web_url',
-                                url: 'https://developers.facebook.com/search/?q=' + payloadText,
-                                title: 'Search ' + payloadText
-                            },
-                            {
-                                type: 'postback',
-                                title: 'Ask me',
-                                payload: 'Ask me'
-                            }
-                        ]
-                    }
-                ]
+    if (typeof (payload.message.text) !== 'undefined') {
+        let payloadText = payload.message.text;
+        //console.log(payload.message.attachments[0].payload.coordinates); //座標
+        //TODO: 解析座標位置
 
+        reply({
+            attachment: {
+                type: 'template',
+                payload: {
+                    template_type: 'generic',
+                    elements: [
+                        {
+                            title: 'facebook api explorer',
+                            image_url: 'http://x.rce.tw/s/h3584935/messenger-bot-store.jpg',
+                            subtitle: 'Answering API is my style!!',
+                            buttons: [
+                                {
+                                    type: 'web_url',
+                                    url: 'https://developers.facebook.com/search/?q=' + payloadText,
+                                    title: 'Search ' + payloadText
+                                },
+                                {
+                                    type: 'postback',
+                                    title: 'Ask me',
+                                    payload: 'Ask me'
+                                }
+                            ]
+                        }
+                    ]
+
+                }
             }
-        }
-    }, (err, info) => {
-        console.log(err);
-    })
+        }, (err, info) => {
+            console.log(err);
+        })
+    } else if(payload.message.attachments[0].payload.type==='image') {
+        reply({
+            attachment:{
+                type:'image',
+                payload:{
+                    url:payload.message.attachments[0].payload.url
+                }
+            }
+        }, (err, info)=>{
+            console.log(err);
+        })
+    }
 })
 
 bot.on('postback', (payload, reply) => {
