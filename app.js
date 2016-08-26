@@ -61,7 +61,8 @@ bot.on('message', (payload, reply) => {
         }
 
         messengerBotLib.getTemplateMessage('button', '請選擇起程站', startObject, function (message) {
-            reply(message, (err, info) => { });
+            console.log(message);
+            reply(message, (err, info) => { console.log(err) });
         })
 
 
