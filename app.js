@@ -51,7 +51,7 @@ bot.on('message', (payload, reply) => {
         // })
 
         let startStation = ['左營', '台南', '嘉義', '雲林', '彰化', '台中', '苗栗', '新竹', '桃園', '板橋', '台北', '南港'];
-        let startObject = null;
+        let startObject = [];
         for (let i = 0; i < startStation.length; i++) {
             startObject[i]={
                 type:'postback',
