@@ -158,3 +158,8 @@ According to <a href="https://developers.facebook.com/docs/messenger-platform">o
     <pre>
         payload.message.attachments[0].payload.coordinates
     </pre>
+
+5. Parse sticker
+    <pre>
+        payload.message.attachments[0].payload.url
+    </pre>
