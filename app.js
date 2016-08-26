@@ -13,7 +13,8 @@ bot.on('error', (err) => {
 })
 
 bot.on('message', (payload, reply) => {
-    console.log(payload.message.attachments[0].payload.url);
+    // console.log(payload.message.attachments[0].payload.url);
+    console.log(payload);
 
     if (typeof (payload.message.text) !== 'undefined') {
         let payloadText = payload.message.text;
