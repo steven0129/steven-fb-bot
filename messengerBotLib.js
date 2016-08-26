@@ -52,7 +52,7 @@ function getTextMessage() {
         text: text
     };
 
-    callback(baseMessage);
+    return baseMessage;
 }
 
 //Quick Replies
@@ -66,7 +66,7 @@ function getQuickReplies() {
         quick_replies:quickReplies
     };
 
-    callback(baseMessage);
+    return baseMessage;
 }
 
 function getImageMessage() {
