@@ -63,6 +63,7 @@ bot.on('postback', (payload, reply) => {
     })
 
     let startObject1 = [];
+    let startObject2 = [];
     for (let i = 0; i < 6; i++) {
         startObject1[i] = startObject[i];
     }
