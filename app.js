@@ -19,48 +19,19 @@ bot.on('message', (payload, reply) => {
 
     if (typeof (payload.message.text) !== 'undefined') {
         let payloadText = payload.message.text;
-        // reply({
-        //     attachment: {
-        //         type: 'template',
-        //         payload: {
-        //             template_type: 'generic',
-        //             elements: [
-        //                 {
-        //                     title: 'facebook api explorer',
-        //                     image_url: 'http://x.rce.tw/s/h3584935/messenger-bot-store.jpg',
-        //                     subtitle: 'Answering API is my style!!',
-        //                     buttons: [
-        //                         {
-        //                             type: 'web_url',
-        //                             url: 'https://developers.facebook.com/search/?q=' + payloadText,
-        //                             title: 'Search ' + payloadText
-        //                         },
-        //                         {
-        //                             type: 'postback',
-        //                             title: 'Ask me',
-        //                             payload: 'Ask me'
-        //                         }
-        //                     ]
-        //                 }
-        //             ]
-
-        //         }
-        //     }
-        // }, (err, info) => {
-        //     console.log(err);
-        // })
-
-        let startStation = ['左營', '台南', '嘉義', '雲林', '彰化', '台中', '苗栗', '新竹', '桃園', '板橋', '台北', '南港'];
-        let startObject = [];
-        for (let i = 0; i < startStation.length; i++) {
-            startObject[i] = {
+        let buttons = [
+            {
+                type: 'web_url',
+                url: 'https://developers.facebook.com/search/?q=' + payloadText,
+                title: 'search ' + payloadText
+            },
+            {
                 type: 'postback',
-                title: startStation[i],
-                payload: startStation[i]
+                title: 'Help',
+                payload: 'Help'
             }
-        }
-
-        messengerBotLib.getTemplateMessage('button', '請選擇起程站', startObject, function (message) {
+        ]
+        messengerBotLib.getTemplateMessage('button', 'What you want to do?', buttons, function (message) {
             console.log(message);
             reply(message, (err, info) => { console.log(err) });
         })
