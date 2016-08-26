@@ -2,7 +2,7 @@ function getTemplateMessage() {
     let baseMessage = {
         attachment: {
             type: 'template',
-            payload:null
+            payload: null
         }
     };
 
@@ -37,6 +37,8 @@ function getTemplateMessage() {
                 text: textB,
                 buttons: buttonsB
             };
+            console.log(baseMessage);
+
             break;
     }
 
