@@ -1,7 +1,8 @@
 function getTemplateMessage() {
     let baseMessage = {
         attachment: {
-            type: 'template'
+            type: 'template',
+            payload:null
         }
     };
 
