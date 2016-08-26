@@ -24,7 +24,7 @@ bot.on('message', (payload, reply) => {
             case 'direction':
                 let choice = [
                     { content_type: 'text', title: '北上', payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE' },
-                    { contnet_type: 'text', title: '南下', payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE' }
+                    { content_type: 'text', title: '南下', payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE' }
                 ];
 
                 messengerBotLib.getQuickReplies('請選擇方向', choice, (message) => {
@@ -62,7 +62,7 @@ bot.on('message', (payload, reply) => {
 bot.on('postback', (payload, reply) => {
     let choice = [
         { content_type: 'text', title: '北上', payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE' },
-        { contnet_type: 'text', title: '南下', payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE' }
+        { content_type: 'text', title: '南下', payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE' }
     ];
 
     messengerBotLib.getQuickReplies('請選擇方向', choice, (message) => {
