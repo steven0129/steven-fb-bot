@@ -1,38 +1,54 @@
 function getTemplateMessage() {
-    let template = {
+    let baseMessage = {
         attachment: {
-            type: 'template',
-            payload: {
-                template_type: 'generic',
-                elements: [
-                    {
-                        title: 'facebook api explorer',
-                        image_url: 'http://x.rce.tw/s/h3584935/messenger-bot-store.jpg',
-                        subtitle: 'Answering API is my style!!',
-                        buttons: [
-                            {
-                                type: 'web_url',
-                                url: 'https://developers.facebook.com/search/?q=' + payloadText,
-                                title: 'Search ' + payloadText
-                            },
-                            {
-                                type: 'postback',
-                                title: 'Ask me',
-                                payload: 'Ask me'
-                            }
-                        ]
-                    }
-                ]
-
-            }
+            type: 'template'
         }
     };
 
-    return template;
+    //generic template
+    //example: getTemplateMessage('generic', titleG, imageUrlG, subTitleG, buttonsG);
+    switch (arguments[0]) {
+        case 'generic':
+            let titleG = arguments[1];
+            let imageUrlG = arguments[2];
+            let subTitleG = arguments[3];
+            let buttonsG = arguments[4];
+            baseMessage.attachment.payload = {
+                template_type: 'generic',
+                elements: [
+                    {
+                        title: titleG,
+                        image_url: imageUrlG,
+                        subtitle: subTitleG,
+                        buttons: buttonsG
+                    }
+                ]
+            };
+            break;
+
+        //generic template
+        //example: getTemplateMessage('button', textB, buttonsB);
+        case 'button':
+            let textB = arguments[1];
+            let buttonsB = arguments[2];
+            baseMessage.attachment.payload = {
+                template_type: 'button',
+                text: textB,
+                buttons: buttonsB
+            };
+            break;
+    }
+
+    return baseMessage;
 }
 
 function getTextMessage() {
-    
+    let baseMessage = {
+        text: arguments[0]
+    };
+
+    return baseMessage;
 }
 
 exports.getTemplateMessage = getTemplateMessage;
+exports.getTextMessage = getTextMessage;

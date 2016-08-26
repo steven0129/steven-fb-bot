@@ -1,5 +1,6 @@
 const http = require('http')
 const Bot = require('messenger-bot')
+const messengerBotLib = require('./messengerBotLib.js');
 const port = process.env.PORT || 80;
 
 let bot = new Bot({
@@ -18,48 +19,58 @@ bot.on('message', (payload, reply) => {
 
     if (typeof (payload.message.text) !== 'undefined') {
         let payloadText = payload.message.text;
-        //console.log(payload.message.attachments[0].payload.coordinates); //座標
-        //TODO: 解析座標位置
+        // reply({
+        //     attachment: {
+        //         type: 'template',
+        //         payload: {
+        //             template_type: 'generic',
+        //             elements: [
+        //                 {
+        //                     title: 'facebook api explorer',
+        //                     image_url: 'http://x.rce.tw/s/h3584935/messenger-bot-store.jpg',
+        //                     subtitle: 'Answering API is my style!!',
+        //                     buttons: [
+        //                         {
+        //                             type: 'web_url',
+        //                             url: 'https://developers.facebook.com/search/?q=' + payloadText,
+        //                             title: 'Search ' + payloadText
+        //                         },
+        //                         {
+        //                             type: 'postback',
+        //                             title: 'Ask me',
+        //                             payload: 'Ask me'
+        //                         }
+        //                     ]
+        //                 }
+        //             ]
 
+        //         }
+        //     }
+        // }, (err, info) => {
+        //     console.log(err);
+        // })
+
+        let startStation = ['左營', '台南', '嘉義', '雲林', '彰化', '台中', '苗栗', '新竹', '桃園', '板橋', '台北', '南港'];
+        let startObject = null;
+        for (let i = 0; i < startStation.length; i++) {
+            startObject[i]={
+                type:'postback',
+                title:startStation[i],
+                payload:startStation[i]
+            }
+        }
+
+        reply(messengerBotLib.getTemplateMessage('buttons', '請選擇起程站', startObject));
+
+    } else if (payload.message.attachments[0].type === 'image') {
         reply({
             attachment: {
-                type: 'template',
+                type: 'image',
                 payload: {
-                    template_type: 'generic',
-                    elements: [
-                        {
-                            title: 'facebook api explorer',
-                            image_url: 'http://x.rce.tw/s/h3584935/messenger-bot-store.jpg',
-                            subtitle: 'Answering API is my style!!',
-                            buttons: [
-                                {
-                                    type: 'web_url',
-                                    url: 'https://developers.facebook.com/search/?q=' + payloadText,
-                                    title: 'Search ' + payloadText
-                                },
-                                {
-                                    type: 'postback',
-                                    title: 'Ask me',
-                                    payload: 'Ask me'
-                                }
-                            ]
-                        }
-                    ]
-
+                    url: payload.message.attachments[0].payload.url
                 }
             }
         }, (err, info) => {
-            console.log(err);
-        })
-    } else if(payload.message.attachments[0].type==='image') {
-        reply({
-            attachment:{
-                type:'image',
-                payload:{
-                    url:payload.message.attachments[0].payload.url
-                }
-            }
-        }, (err, info)=>{
             console.log(err);
         })
     }
@@ -86,6 +97,4 @@ bot.on('postback', (payload, reply) => {
 
 
 http.createServer(bot.middleware()).listen(port)
-console.log('Echo bot server running at port ' + port + '.')
-
-bot.sendMessage()
+console.log('steven fb explorer bot server running at port ' + port + '.')
